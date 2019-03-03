@@ -37,7 +37,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-         $user = new User();
+        $user = new User();
         $user->name = $request['username'];
         $user->email = $request['email'];
         $user->password = $request['password'];
@@ -66,7 +66,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -78,7 +80,19 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $user = User::find($id);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+
+        if(!empty($request->get('password'))){
+
+            $user->password = $request->get('password');
+        }
+
+        $user->save();
+
+        return redirect()->route('users.index')->withFlashMessage('Korisnik je uspješno promijenjen.');
     }
 
     /**
@@ -89,6 +103,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect()->route('users.index')->withFlashMessage('Korisnik je uspješno izbrisan.');
     }
 }
