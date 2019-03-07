@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
-     <head>
-          <meta charset="utf-8">
-          <meta http-equiv="X-UA-Compatible" content="IE=edge">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <title>Algebra Blog</title>
-          <!-- Latest compiled and minified CSS -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-     </head>
-     <body>
+@extends('auth.master')
+
+     @section('content')
           <div class="container">
                @if(session()->has('flash_message'))
                <div class="alert alert-success alert-dismissible">
@@ -17,7 +9,10 @@
                @endif
                <div class="panel panel-default">
                     <div class="panel-heading">
-                         <a href="{{ route('users.create') }}" class="btn btn-primary" role="button">Dodaj novog korisnika</a>
+                         <p>
+
+                         </p>
+                         <a href="{{ route('users.create') }}" class="btn btn-primary" role="button">Add new user</a>
                     </div>
 
                     <div class="panel-body">
@@ -28,6 +23,7 @@
                                         <th scope="col">iD</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Created at</th>
                                         <th scope="col">Action</th>
                                    </tr>
                               </thead>
@@ -37,12 +33,13 @@
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>{{ $user->created_at->diffForHumans() }}</td>
                                         <td>
                                              <form action="{{ route('users.destroy', $user->id) }}" method="post">
                                                   {{ method_field('DELETE') }}
                                                   {{ csrf_field() }}
-                                                  <a href="{{ route('users.edit', $user->id)}}" class="btn btn-primary btn-sm" role="button">Uredi</a>
-                                                  <button class="btn btn-danger btn-sm">Izbriši</button>
+                                                  <a href="{{ route('users.edit', $user->id)}}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                                                  <button class="btn btn-danger btn-sm">Delete</button>
                                              </form>
 
                                         </td>
@@ -52,7 +49,7 @@
                          </table>
                          @else
                          <div class="well">
-                              <h3>U bazi trenutno nema korisnika.</h3>
+                              <h3>There is no user in database.</h3>
                          </div>
                          @endif
                     </div>
@@ -61,5 +58,4 @@
           <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
           <!-- Latest compiled and minified JavaScript -->
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-     </body>
-</html>
+     @endsection

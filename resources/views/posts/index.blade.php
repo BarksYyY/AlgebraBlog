@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html>
-     <head>
-          <meta charset="utf-8">
-          <title></title>
-     </head>
-     <body>
+@extends('layouts.master')
 
-          @foreach ($posts as $key => $post)
-               <a href="posts/{{ $post->id }}">
+@section('content')
 
-               <li>{{ $post->title }}</li>
+    <div class="col-sm-8 blog-main">
 
-               </a>
+        @foreach ($posts as $key => $post)
+        <div class="blog-post">
+            <h2 class="blog-post-title">{{ $post->title }}</h2>
+            <p class="blog-post-meta"> {{ $post->created_at->toFormattedDateString() }} <a href="#">Mark</a></p>
 
-               <section>
-                    {{ $post->body }}
-               </section>
-          @endforeach
+            <section>
+                {{ $post->body }}
+            </section>
 
-     </body>
-</html>
+        </div>
+        @endforeach
+
+        <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="#">Older</a>
+            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
+        </nav>
+
+    </div>
+
+@endsection

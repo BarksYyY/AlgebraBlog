@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts', 'PostsController@index');
+Route::get('/posts', 'PostsController@index')->name('posts');
 
 Route::get('/posts/{id}', 'PostsController@show');
 
@@ -32,9 +32,13 @@ Route::get('/posts/{id}', 'PostsController@show');
 //
 // Route::get('/users{user}/edit', 'UsersController@edit');
 //
-// Route::put('/users{user}', 'UsersController@update');
+// Route::patch('/users{user}', 'UsersController@update');
 //
 // Route::delete('/users{user}', 'UsersController@destroy');
 
 // Ova mjenja ovih 7
 Route::resource('users', 'UsersController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
