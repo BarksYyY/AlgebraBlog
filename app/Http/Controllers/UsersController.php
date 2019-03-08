@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -40,8 +41,7 @@ class UsersController extends Controller
         $user = new User();
         $user->name = $request['username'];
         $user->email = $request['email'];
-        $user->password = $request['password'];
-        //$user->remember_token = $request['grfahahadhearhearhearharae'];
+        $user->password = Hash::make($request['password']);
         $user->save();
 
         return redirect()->route('users.index')->withFlashMessage('User added successfully.');
@@ -84,17 +84,18 @@ class UsersController extends Controller
     {
 
         $user = User::find($id);
+        $user_full_name = $user->name;
         $user->name = request('name');
         $user->email = request('email');
 
         if(!empty(request('password'))){
 
-            $user->password = request('password');
+            $user->password = bcrypt(request('password'));
         }
 
         $user->save();
 
-        return redirect()->route('users.index')->withFlashMessage('User updated successfully.');
+        return redirect()->route('users.index')->withFlashMessage('User '.$user_full_name.' updated successfully.');
     }
 
     /**
@@ -106,8 +107,9 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $user_full_name = $user->name;
         $user->delete();
 
-        return redirect()->route('users.index')->withFlashMessage('User deleted successfully.');
+        return redirect()->route('users.index')->withFlashMessage('User '.$user_full_name.' deleted successfully.');
     }
 }

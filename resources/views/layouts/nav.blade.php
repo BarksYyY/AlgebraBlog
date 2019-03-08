@@ -1,15 +1,3 @@
-<!-- <div class="blog-masthead">
-  <div class="container">
-    <nav class="nav blog-nav">
-      <a class="nav-link active" href="#">Home</a>
-      <a class="nav-link" href="#">New features</a>
-      <a class="nav-link" href="#">Press</a>
-      <a class="nav-link" href="#">New hires</a>
-      <a class="nav-link" href="#">About</a>
-    </nav>
-  </div>
-</div> -->
-
 <nav class="navbar navbar-expand-md navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
@@ -24,7 +12,7 @@
             <ul class="nav blog-nav">
                 <a class="nav-link" href="{{ route('home') }}">Home</a>
                 <a class="nav-link" href="{{ route('posts') }}">Posts</a>
-                <a class="nav-link" href="{{ route('users.index') }}">Users</a>                
+                <a class="nav-link" href="{{ route('users.index') }}">Users</a>
             </ul>
 
             <!-- Right Side Of Navbar -->
