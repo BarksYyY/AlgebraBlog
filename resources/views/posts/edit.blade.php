@@ -14,11 +14,11 @@
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="title">Title:</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ $post->title }}" />
+                    <input type="text" class="form-control {{ $errors->has('title') ? 'has-error' : '' }} " id="title" name="title" value="{{ $post->title }}" />
                 </div>
                 <div class="form-group">
                     <label for="body">Body:</label>
-                    <textarea class="form-control" id="body" name="body" rows="10" cols="80">{{ $post->body }}</textarea>
+                    <textarea class="form-control {{ $errors->has('body') ? 'has-error' : '' }} " id="body" name="body" rows="10" cols="80">{{ $post->body }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Confirm</button>
                 <a href="{{ route('posts') }}" class="btn btn-danger" role="button">Back</a>
