@@ -34,6 +34,9 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Confirm</button>
                 <a href="{{ route('users.index')}}" class="btn btn-danger" role="button">Back</a>
+
+                @include('layouts.errors')
+                
             </form>
         </div>
     </div>

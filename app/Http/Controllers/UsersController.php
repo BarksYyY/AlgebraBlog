@@ -13,6 +13,11 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(){
+        $this->middleware('auth')->except(['index', 'create', 'store']);
+    }
+
     public function index()
     {
         $users = User::all();
@@ -38,13 +43,19 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        request()->validate([
+            'username'  => 'required|min:3',
+            'email'     => 'required|email|max:255|unique:users',
+            'password'  => 'required|confirmed|min:6'
+    ]   );
+
         $user = new User();
         $user->name = $request['username'];
         $user->email = $request['email'];
         $user->password = Hash::make($request['password']);
         $user->save();
 
-        return redirect()->route('users.index')->withFlashMessage('User added successfully.');
+        return redirect()->route('users.index')->withFlashMessage('User created successfully.');
     }
 
     /**
@@ -82,6 +93,11 @@ class UsersController extends Controller
      */
     public function update($id)
     {
+        request()->validate([
+            'name'      => 'required|min:3',
+            'email'     => 'required|email|max:255|unique:users,email,' .$id,
+            'password'  => 'nullable|confirmed|min:6'
+        ]);
 
         $user = User::find($id);
         $user_full_name = $user->name;
