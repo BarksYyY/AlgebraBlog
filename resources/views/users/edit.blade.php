@@ -29,10 +29,14 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control {{ $errors->has('password') ? 'has-error' : '' }}" id="password" name="password" placeholder="Leave empty if you don't want to change">
                 </div>
-                <button type="submit" class="btn btn-primary">Edit</button>
-                <a href="{{ route('users.index') }}" class="btn btn-danger" role="button">Back</a>
-
-                @include('layouts.errors')
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                    <a href="{{ route('users.index') }}" class="btn btn-danger" role="button">Back</a>
+                </div>
+                
+                <div class="form-group">
+                    @include('layouts.errors')
+                </div>
 
             </form>
         </div>

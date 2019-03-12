@@ -34,7 +34,7 @@ class PostsController extends Controller
 
         request()->validate([
             'title' =>  'required|min:3|max:255',
-            'body'  =>  'required|min:3'
+            'body'  =>  'required|min:3|max:65535'
         ]);
 
         // $post = new Post();
@@ -66,9 +66,9 @@ class PostsController extends Controller
 
         request()->validate([
             'title' =>  'required|min:3|max:255',
-            'body'  =>  'required|min:3'
+            'body'  =>  'required|min:3|max:65535'
         ]);
-        
+
         $post = Post::find($id);
         $post_title = $post->title;
         $post->title = request('title');

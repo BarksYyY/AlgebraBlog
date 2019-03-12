@@ -32,11 +32,15 @@
                     <label for="confirm_password">Confirm password</label>
                     <input type="password" class="form-control {{ $errors->has('password') ? 'has-error' : '' }}" id="confirm_password" name="confirm_password" placeholder="Confirm your password">
                 </div>
-                <button type="submit" class="btn btn-primary">Confirm</button>
-                <a href="{{ route('users.index')}}" class="btn btn-danger" role="button">Back</a>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    <a href="{{ route('users.index')}}" class="btn btn-danger" role="button">Back</a>
+                </div>
 
-                @include('layouts.errors')
-
+                <div class="form-group">
+                    @include('layouts.errors')
+                </div>
+                
             </form>
         </div>
     </div>

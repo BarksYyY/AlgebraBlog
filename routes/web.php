@@ -25,11 +25,15 @@ Route::get('/posts/{post}', 'PostsController@show')->name('posts.show');
 
 Route::post('/posts', 'PostsController@store')->name('posts.store');
 
-Route::get('/posts{post}/edit', 'PostsController@edit')->name('posts.edit');
+Route::get('/posts/{post}/edit', 'PostsController@edit')->name('posts.edit');
 
-Route::patch('/posts{post}', 'PostsController@update')->name('posts.update');
+Route::patch('/posts/{post}', 'PostsController@update')->name('posts.update');
 
-Route::delete('/posts{post}', 'PostsController@destroy')->name('posts.destroy');
+Route::delete('/posts/{post}', 'PostsController@destroy')->name('posts.destroy');
+
+
+//comments
+Route::post('/posts/{id}/comment', 'CommentController@store')->middleware('auth');
 
 
 // Route::get('/users', 'UsersController@index');
@@ -38,13 +42,13 @@ Route::delete('/posts{post}', 'PostsController@destroy')->name('posts.destroy');
 //
 // Route::post('/users', 'UsersController@store');
 //
-// Route::get('/users{user}', 'UsersController@show');
+// Route::get('/users/{user}', 'UsersController@show');
 //
-// Route::get('/users{user}/edit', 'UsersController@edit');
+// Route::get('/users/{user}/edit', 'UsersController@edit');
 //
-// Route::patch('/users{user}', 'UsersController@update');
+// Route::patch('/users/{user}', 'UsersController@update');
 //
-// Route::delete('/users{user}', 'UsersController@destroy');
+// Route::delete('/users/{user}', 'UsersController@destroy');
 
 // Ova mjenja ovih 7
 Route::resource('users', 'UsersController');

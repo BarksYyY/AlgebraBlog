@@ -27,6 +27,43 @@
             <a href="{{ route('posts') }}" class="btn btn-info btn-sm" role="button" style="margin-top: 20px">Back</a>
         </form>
 
+        <hr>
+        {{-- Add a comment --}}
+
+        <div class="card">
+            <div class="card-block">
+                <form action="/posts/{{ $post->id }}/comment" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <textarea name="body" placeholder="Your comment here" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Add Comment</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        @if (count($post->comments))
+        <hr>
+        <div class="comments">
+            <h3>Comments:</h3>
+            <ul>
+                @foreach($post->comments as $comment)
+                    <li class="list-group-item">
+                        <b>{{ $comment->user->name }}</b>&nbsp;
+                        <i>{{ $comment->created_at->diffForHumans() }}</i>:&nbsp;
+                        {{ $comment->body }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+        @else
+            <hr>
+            <p>This post has not comments yet!</p>
+        @endif
     </div>
 </div>
 @endsection
